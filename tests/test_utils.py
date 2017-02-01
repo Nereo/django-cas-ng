@@ -1,5 +1,5 @@
 from __future__ import absolute_import
-from django_cas_ng.utils import get_redirect_url, get_service_url
+from django_cas_ng.utils import get_redirect_url, get_service_url, get_server_url
 from django.test import RequestFactory
 
 #
@@ -157,5 +157,19 @@ def test_redirect_url_next_no_named_pattern(settings):
 
     actual = get_redirect_url(request)
     expected = 'home'
+
+    assert actual == expected
+
+def _test_get_server_url_dummy_method(request):
+    return 'http://testcasserver/login'
+
+def test_get_server_url(settings):
+    settings.CAS_SERVER_METHOD = 'tests.test_utils._test_get_server_url_dummy_method'
+
+    factory = RequestFactory()
+    request = factory.get('/login/', data={'next': 'home'})
+
+    actual = get_server_url(request)
+    expected = 'http://testcasserver/login'
 
     assert actual == expected

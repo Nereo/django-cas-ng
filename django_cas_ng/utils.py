@@ -49,8 +49,20 @@ def get_service_url(request, redirect_to=None):
     })
     return service
 
+def get_server_url(request):
+    """
+    Executes the method provided in settings to get the CAS server URL dynamically
+    """
+    if django_settings.CAS_SERVER_METHOD:
+        import sys
+        mod, member = django_settings.CAS_SERVER_METHOD.rsplit('.', 1)
+        __import__(mod)
+        module = sys.modules[mod]
+        method = getattr(module, member)
+        return method(request)
+    return django_settings.CAS_SERVER_URL
 
-def get_cas_client(service_url=None):
+def get_cas_client(service_url=None, server_url=None):
     """
     initializes the CASClient according to
     the CAS_* settigs
@@ -58,7 +70,7 @@ def get_cas_client(service_url=None):
     return CASClient(
         service_url=service_url,
         version=django_settings.CAS_VERSION,
-        server_url=django_settings.CAS_SERVER_URL,
+        server_url=server_url or django_settings.CAS_SERVER_URL,
         extra_login_params=django_settings.CAS_EXTRA_LOGIN_PARAMS,
         renew=django_settings.CAS_RENEW,
         username_attribute=django_settings.CAS_USERNAME_ATTRIBUTE,

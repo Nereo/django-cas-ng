@@ -28,8 +28,8 @@ from datetime import timedelta
 from .signals import cas_user_logout
 from .models import ProxyGrantingTicket, SessionTicket
 from .utils import (get_cas_client, get_service_url,
-                    get_protocol, get_redirect_url,
-                    get_user_from_session)
+                    get_server_url, get_protocol,
+                    get_redirect_url, get_user_from_session)
 
 __all__ = ['login', 'logout', 'callback']
 
@@ -39,7 +39,9 @@ __all__ = ['login', 'logout', 'callback']
 def login(request, next_page=None, required=False):
     """Forwards to CAS login URL or verifies CAS ticket"""
     service_url = get_service_url(request, next_page)
-    client = get_cas_client(service_url=service_url)
+    server_url = get_server_url(request)
+    client = get_cas_client(service_url=service_url,
+                            server_url=server_url)
 
     if not next_page:
         next_page = get_redirect_url(request)

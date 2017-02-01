@@ -19,6 +19,7 @@ _DEFAULTS = {
     'CAS_REDIRECT_URL': '/',
     'CAS_RETRY_LOGIN': False,
     'CAS_SERVER_URL': None,
+    'CAS_SERVER_METHOD': None,
     'CAS_VERSION': '2',
     'CAS_USERNAME_ATTRIBUTE': 'uid',
     'CAS_PROXY_CALLBACK': None,

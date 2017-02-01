@@ -1,7 +1,7 @@
 # ⁻*- coding: utf-8 -*-
 from django.db import models
 from django.conf import settings
-from .utils import (get_cas_client, get_service_url, get_user_from_session)
+from .utils import (get_cas_client, get_service_url, get_server_url, get_user_from_session)
 
 
 from importlib import import_module
@@ -52,7 +52,9 @@ class ProxyGrantingTicket(models.Model):
             )
         else:
             service_url = get_service_url(request)
-            client = get_cas_client(service_url=service_url)
+            server_url = get_server_url(request)
+            client = get_cas_client(service_url=service_url,
+                                    server_url=server_url)
             try:
                 return client.get_proxy_ticket(pgt, service)
             # change CASError to ProxyError nicely

@@ -8,7 +8,7 @@ from django.conf import settings
 from django.core.exceptions import ImproperlyConfigured
 
 from django_cas_ng.signals import cas_user_authenticated
-from .utils import get_cas_client
+from .utils import get_cas_client, get_server_url
 
 __all__ = ['CASBackend']
 
@@ -18,7 +18,9 @@ class CASBackend(ModelBackend):
 
     def authenticate(self, ticket, service, request):
         """Verifies CAS ticket and gets or creates User object"""
-        client = get_cas_client(service_url=service)
+        server_url = get_server_url(request)
+        client = get_cas_client(service_url=service,
+                                server_url=server_url)
         username, attributes, pgtiou = client.verify_ticket(ticket)
         if attributes:
             request.session['attributes'] = attributes
