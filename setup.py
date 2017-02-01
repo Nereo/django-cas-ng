@@ -34,10 +34,10 @@ setup(
     package_data = {
         'django_cas_ng': ['locale/*/LC_MESSAGES/*',],
     },
-    url='https://github.com/mingchen/django-cas-ng',
+    url='https://github.com/Nereo/django-cas-ng',
     #bugtrack_url='https://github.com/mingchen/django-cas-ng/issues',  # not support this key
-    download_url ='https://github.com/mingchen/django-cas-ng/releases',
-    version='3.5.6',
+    download_url ='https://github.com/Nereo/django-cas-ng/releases',
+    version='4.0.0',
     install_requires=['python-cas>=1.2.0'],
     zip_safe=False,  # dot not package as egg or django will not found management commands
 )
