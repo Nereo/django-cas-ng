@@ -37,8 +37,8 @@ setup(
     url='https://github.com/Nereo/django-cas-ng',
     #bugtrack_url='https://github.com/mingchen/django-cas-ng/issues',  # not support this key
     download_url ='https://github.com/Nereo/django-cas-ng/releases',
-    version='4.0.1',
-    install_requires=['python-cas>=1.2.0'],
+    version='4.0.2',
+    install_requires=['nereo-python-cas>=1.0.0'],
     zip_safe=False,  # dot not package as egg or django will not found management commands
 )
 
