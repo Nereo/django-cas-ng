@@ -11,8 +11,8 @@ with codecs.open('README.rst', encoding='utf-8') as f:
     readme = f.read()
 
 setup(
-    author='Ming Chen',
-    author_email='mockey.chen@gmail.com',
+    author='Francois Voron',
+    author_email='francois.voron@nereo.fr',
     classifiers=[
         'Development Status :: 5 - Production/Stable',
         'Environment :: Web Environment',
@@ -29,7 +29,7 @@ setup(
     keywords=['django', 'cas', 'cas2', 'cas3', 'client', 'sso', 'single sign-on', 'authentication', 'auth'],
     license='BSD',
     long_description=readme,
-    name='django-cas-ng',
+    name='nereo-django-cas-ng',
     packages=['django_cas_ng', 'django_cas_ng.management', 'django_cas_ng.management.commands', 'django_cas_ng.migrations'],
     package_data = {
         'django_cas_ng': ['locale/*/LC_MESSAGES/*',],
@@ -37,7 +37,7 @@ setup(
     url='https://github.com/Nereo/django-cas-ng',
     #bugtrack_url='https://github.com/mingchen/django-cas-ng/issues',  # not support this key
     download_url ='https://github.com/Nereo/django-cas-ng/releases',
-    version='4.0.0',
+    version='4.0.1',
     install_requires=['python-cas>=1.2.0'],
     zip_safe=False,  # dot not package as egg or django will not found management commands
 )
